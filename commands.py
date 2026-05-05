@@ -16,8 +16,13 @@ def get_reply_keyboard():
 
 @router.message(Command("start"))
 async def cmd_start(message: Message):
+    # Сначала Reply-кнопка
     await message.answer(
-        "👋 你好！Я MAX (麦克斯) - твой гид по китайскому языку!\n\n"
+        "👋 你好！Я MAX (麦克斯) - твой гид по китайскому языку!",
+        reply_markup=get_reply_keyboard()
+    )
+    # Потом Inline-меню
+    await message.answer(
         "📚 Выбирай раздел:",
         reply_markup=get_main_menu_keyboard()
     )
