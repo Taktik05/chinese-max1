@@ -5,7 +5,6 @@ from main_menu_kb import get_main_menu_keyboard
 router = Router()
 @router.message(Command("start"))
 async def cmd_start(message: Message):
-    # Только Reply-кнопка
     await message.answer(
         "👋 你好！Я MAX (麦克斯) - твой гид по китайскому языку!",
         reply_markup=ReplyKeyboardMarkup(
