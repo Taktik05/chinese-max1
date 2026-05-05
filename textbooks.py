@@ -1,22 +1,15 @@
 from aiogram import Router, F
-from aiogram.types import CallbackQuery
+from aiogram.types import CallbackQuery, FSInputFile
 from levels_kb import get_levels_keyboard
 from textbook_data import TEXTBOOKS
+from images_data import TEXTBOOK_IMAGES
+import os
 
 router = Router()
 
 @router.callback_query(F.data.startswith("book_"))
 async def show_book_levels(callback: CallbackQuery):
     book_key = callback.data.replace("book_", "")
-    
-    if book_key == "all_collection":
-        await callback.message.edit_text(
-            "📦 Полный сборник всех материалов по китайскому языку.\n\n"
-            "Нажми на кнопку ниже, чтобы открыть:",
-            reply_markup=get_levels_keyboard(book_key)
-        )
-        await callback.answer()
-        return
     
     book = TEXTBOOKS.get(book_key)
     if not book:
@@ -32,8 +25,17 @@ async def show_book_levels(callback: CallbackQuery):
         for level_key, level in book["items"].items():
             text += f"\n• {level['name']} - {level['description']}"
     
-    await callback.message.edit_text(
-        text,
-        reply_markup=get_levels_keyboard(book_key)
-    )
+    image_path = TEXTBOOK_IMAGES.get(book_key)
+    if image_path and os.path.exists(image_path):
+        await callback.message.answer_photo(
+            photo=FSInputFile(image_path),
+            caption=text,
+            reply_markup=get_levels_keyboard(book_key)
+        )
+    else:
+        await callback.message.edit_text(
+            text,
+            reply_markup=get_levels_keyboard(book_key)
+        )
+    
     await callback.answer()
