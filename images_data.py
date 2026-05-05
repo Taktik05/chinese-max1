@@ -4,5 +4,4 @@ TEXTBOOK_IMAGES = {
     "boya_chinese": "boya_chinese.png",
     "easy_steps": "easy_steps.png",
     "integrated_chinese": "integrated_chinese.png",
-    "all_collection": "all_collection.png",
 }
