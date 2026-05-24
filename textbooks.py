@@ -27,13 +27,15 @@ async def show_book_levels(callback: CallbackQuery):
     
     image_path = TEXTBOOK_IMAGES.get(book_key)
     if image_path and os.path.exists(image_path):
+        # Отправляем новое сообщение с фото ВСЕГДА
         await callback.message.answer_photo(
             photo=FSInputFile(image_path),
             caption=text,
             reply_markup=get_levels_keyboard(book_key)
         )
     else:
-        await callback.message.edit_text(
+        # Для "Вся копилка" и Integrated Chinese - просто текст
+        await callback.message.answer(
             text,
             reply_markup=get_levels_keyboard(book_key)
         )

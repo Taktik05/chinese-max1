@@ -9,7 +9,7 @@ router = Router()
 
 @router.callback_query(F.data == "main_menu")
 async def show_main_menu(callback: CallbackQuery):
-    await callback.message.edit_text(
+    await callback.message.answer(
         "👋 你好！Я MAX (麦克斯) - твой гид по китайскому языку!\n\n"
         "Выбирай раздел:",
         reply_markup=get_main_menu_keyboard()
@@ -18,7 +18,7 @@ async def show_main_menu(callback: CallbackQuery):
 
 @router.callback_query(F.data == "back_to_main")
 async def back_to_main(callback: CallbackQuery):
-    await callback.message.edit_text(
+    await callback.message.answer(
         "👋 你好！Я MAX (麦克斯) - твой гид по китайскому языку!\n\n"
         "Выбирай раздел:",
         reply_markup=get_main_menu_keyboard()
@@ -27,7 +27,7 @@ async def back_to_main(callback: CallbackQuery):
 
 @router.callback_query(F.data == "textbooks")
 async def show_textbooks(callback: CallbackQuery):
-    await callback.message.edit_text(
+    await callback.message.answer(
         "📚 Выбери серию учебников:",
         reply_markup=get_textbooks_keyboard()
     )
@@ -35,7 +35,7 @@ async def show_textbooks(callback: CallbackQuery):
 
 @router.callback_query(F.data == "start_here")
 async def show_start_here(callback: CallbackQuery):
-    await callback.message.edit_text(
+    await callback.message.answer(
         START_HERE_TEXT,
         reply_markup=get_start_here_keyboard()
     )
@@ -43,7 +43,7 @@ async def show_start_here(callback: CallbackQuery):
 
 @router.callback_query(F.data == "about")
 async def show_about(callback: CallbackQuery):
-    await callback.message.edit_text(
+    await callback.message.answer(
         ABOUT_TEXT,
         reply_markup=get_about_keyboard()
     )
