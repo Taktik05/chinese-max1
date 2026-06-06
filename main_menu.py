@@ -45,6 +45,30 @@ async def show_start_here(callback: CallbackQuery):
 async def show_about(callback: CallbackQuery):
     await callback.message.answer(
         ABOUT_TEXT,
+@router.callback_query(F.data == "feedback")
+async def show_feedback(callback: CallbackQuery):
+    text = """📝 Обратная связь
+
+Спасибо за использование бота MAX (麦克斯 mài kè sī)
+
+Ваше мнение поможет нам улучшить содержание бота, сделать навигацию удобнее и добавить новые полезные материалы.
+
+Пожалуйста, уделите 2–3 минуты для прохождения небольшой анкеты.
+
+🔗 Ссылка на форму:
+https://forms.yandex.ru/u/6a20e0f8068ff076339986a3
+
+Заранее спасибо! 🙏"""
+    
+    # Создаём клавиатуру с кнопкой "Назад"
+    from aiogram.utils.keyboard import InlineKeyboardBuilder
+    builder = InlineKeyboardBuilder()
+    builder.button(text="🔙 Назад", callback_data="back_to_main")
+    builder.button(text="🏠 Главное меню", callback_data="main_menu")
+    builder.adjust(1)
+    
+    await callback.message.edit_text(text, reply_markup=builder.as_markup())
+    await callback.answer()
         reply_markup=get_about_keyboard()
     )
     await callback.answer()
