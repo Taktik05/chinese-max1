@@ -138,6 +138,7 @@ async def help_pronunciation(callback: CallbackQuery):
 • TrainChinese — https://www.trainchinese.com
 • 大БКРС — https://bkrs.info/
 • 懂中文 (тренировка тонов) — https://www.dong-chinese.com/learn/sounds/pinyin/toneTrainer
+• Luvvoice (озвучка текста) — https://luvvoice.com/ru/language/chinese
 
 📌 Повторяйте вслух и сравнивайте своё произношение с оригиналом."""
     await send_help_with_image(callback, "pronunciation", text)
